@@ -4,8 +4,8 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-        glue = {"org.fundacionjala.trello"},
-        features = "src/test/resources/features",
+        glue = {"org.fundationjala.tello"},
+        features = "src/test/resources/feature",
         plugin = "pretty"
 )
 public class Runner extends AbstractTestNGCucumberTests {
