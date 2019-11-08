@@ -1,4 +1,4 @@
-package org.fundationjala.tello.steps;
+package org.fundacionjala.trello.steps;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -6,7 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.fundationjala.trello.*;
+import org.fundacionjala.trello.*;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 
@@ -100,5 +100,11 @@ public class RequestSteps {
                     EndpointHelper.buildEndpoint(context, endpoint),
                     body);
         }
+    }
+    @And("I DELETE all boards of a member by ID {string}")
+    public void iDELETEAllBoardsOfAMemberByID(String endpoints) {
+
+            System.out.println(endpoints);
+
     }
 }

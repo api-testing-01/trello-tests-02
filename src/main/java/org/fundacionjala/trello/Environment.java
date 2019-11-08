@@ -1,4 +1,4 @@
-package org.fundationjala.trello;
+package org.fundacionjala.trello;
 
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;

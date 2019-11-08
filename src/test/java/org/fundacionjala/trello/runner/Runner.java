@@ -1,4 +1,4 @@
-package org.fundationjala.tello.runner;
+package org.fundacionjala.trello.runner;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;

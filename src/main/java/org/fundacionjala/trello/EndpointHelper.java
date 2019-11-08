@@ -1,4 +1,4 @@
-package org.fundationjala.trello;
+package org.fundacionjala.trello;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

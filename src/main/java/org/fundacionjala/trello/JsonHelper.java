@@ -1,4 +1,4 @@
-package org.fundationjala.trello;
+package org.fundacionjala.trello;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
