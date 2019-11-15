@@ -7,8 +7,9 @@ Feature: Organizations
     {
     "displayName": "Test1" ,
     "desc": "This is team description",
-    "name": "test"
-    }
+    "name": "test" ,
+    "website": "https://trello.com/"
+     }
     """
     And I validate the response has status code 200
     And I save the response as "O"
@@ -16,5 +17,7 @@ Feature: Organizations
   Scenario: GET Organizations
     When I send a GET request to "/organizations/{O.id}"
     Then I validate the response has status code 200
+    And I validate the response contains "displayName" equals "Test1"
+    And I validate the response contains "website" equals "https://trello.com/"
     And I send a DELETE request to "/organizations/{O.id}"
     And I validate the response has status code 200
