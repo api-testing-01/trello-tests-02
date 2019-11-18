@@ -15,9 +15,9 @@ Feature: Organizations
     And I save the response as "O"
 
   Scenario: GET Organizations
-    When I send a GET request to "/organizations/{O.id}"
+    When I send a "GET" request to "/organizations/{O.id}"
     Then I validate the response has status code 200
     And I validate the response contains "displayName" equals "Test1"
     And I validate the response contains "website" equals "https://trello.com/"
-    And I send a DELETE request to "/organizations/{O.id}"
+    And I send a "DELETE" request to "/organizations/{O.id}"
     And I validate the response has status code 200
