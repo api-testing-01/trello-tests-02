@@ -46,6 +46,18 @@ Feature: Cards
     And I validate the response has status code 200
 
   @cleanData
+  Scenario: POST Card
+    When I send a "POST" request to "/cards" with json body
+    """
+    {
+    "name": "Lizzy's Card [POST]",
+    "idList": "(L.id)"
+    }
+    """
+    Then I validate the response has status code 200
+    And I validate the response contains "name" equals "Lizzy's Card [POST]"
+
+  @cleanData
   Scenario: PUT Card
     When I send a "PUT" request to "/cards/{C.id}" with json body
     """
