@@ -32,7 +32,7 @@
   "idLabels": [
 
   ],
-  "idList": "58e7fee3e06e4001f1cc3658",
+  "idList": "(L.id)",
   "idMembers": [
 
   ],
@@ -42,7 +42,7 @@
   "labels": [
 
   ],
-  "name": "Trello Alerts for Slack",
+  "name": "Api Testing Trello",
   "pos": 131071,
   "shortUrl": "https://trello.com/c/SDmaAwz9",
   "url": "https://trello.com/c/SDmaAwz9/1579-trello-alerts-for-slack"
