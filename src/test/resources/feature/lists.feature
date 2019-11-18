@@ -1,48 +1,67 @@
-#Feature: Lists
-#  Background: User is in Board
-#    Given I login as "owner"
-#    When I open the board creation form
-#    And I fill the board form with:
-#      | title   | My Board for Lists |
-#      | team    | No team     |
-#      | privacy | Private     |
-#      | image   | red       |
-#    And I click cancel button in list form
-#
-#  Scenario: Add a list in board
-#    When I click add a list button
-#    And I set the list title "My First List"
-#    Then I validate the list "My First List" is displayed
-#
-#  Scenario: Edit a list
-#    Given I click add a list button
-#    And I set the list title "My First List"
-#    When I click the list name "My First List"
-#    And I set a new list title "Edited list"
-#    Then I validate the new title is "Edited list"
-#
-#  Scenario: Archive a List
-#    Given I click add a list button
-#    And I set the list title "My First List"
-#    When I click the actions button in the list "My First List"
-#    And I select the action list "Archive This List"
-#    Then I validate the list named "My First List" is archived
-#    And I click More in right sidebar menu
-#    And I click Archived Items
-#    And I type "My First List" in search field
-#    And I click Switch to lists button
-#    And I validate the "My First List" is displayed in the search results
-#
-#  Scenario: Move a List
-#    Given I click add a list button
-#    And I set the list title "My List1"
-#    And I set the list title "My List2"
-#    When I click the actions button in the list "My List1"
-#    And I select the action list "Move List"
-#    And I select the position "2"
-#    Then I validate "My List2" is before "My List1"
-#    And I click the actions button in the list "My List1"
-#    And I select the action list "Move List"
-#    And I validate the position "2" is displayed
-#    And I click position
-#    And I validate the position "2" is marked as current
+Feature: Lists
+  Background: Create a Board
+    Given I use the "trello" service and the "owner" account
+    And I send a "POST" request to "/boards" with json body
+    """
+    {
+    "name": "Board created by POST cucumber",
+    "defaultLists": false
+     }
+    """
+    And I validate the response has status code 200
+    And I save the response as "B"
+    And I save the request endpoint for deleting
+
+  @cleanData
+  Scenario: POST list
+    When I send a "POST" request to "/lists" with json body
+    """
+    {
+    "name": "List created by POST cucumber",
+    "idBoard": "(B.id)"
+     }
+    """
+    Then I validate the response has status code 200
+    And I validate the response contains "name" equals "List created by POST cucumber"
+    #And I validate the response contains "idBoard" equals "{B.id}"
+    #And I validate the response contains "pos" equals "top"
+    #And I validate the response contains "closed" equals "false"
+
+  @cleanData
+  Scenario: PUT list
+    Given I send a "POST" request to "/lists" with json body
+    """
+    {
+    "name": "List created by POST cucumber",
+    "idBoard": "(B.id)"
+     }
+    """
+    And I validate the response has status code 200
+    And I save the response as "L"
+    When I send a "PUT" request to "/lists/{L.id}" with json body
+    """
+    {
+    "name": "List Edited by PUT cucumber"
+     }
+    """
+    And I validate the response contains "name" equals "List Edited by PUT cucumber"
+    #And I validate the response contains "idBoard" equals "{B.id}"
+    #And I validate the response contains "pos" equals "top"
+    #And I validate the response contains "closed" equals "false"
+
+  @cleanData
+  Scenario: GET List
+    Given I send a "POST" request to "/lists" with json body
+    """
+    {
+    "name": "List created by POST cucumber",
+    "idBoard": "(B.id)"
+     }
+    """
+    And I validate the response has status code 200
+    And I save the response as "L"
+    When I send a "GET" request to "/lists/{L.id}"
+    And I validate the response contains "name" equals "List created by POST cucumber"
+    #And I validate the response contains "idBoard" equals "{B.id}"
+    #And I validate the response contains "pos" equals "top"
+    #And I validate the response contains "closed" equals "false"
