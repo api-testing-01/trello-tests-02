@@ -10,7 +10,7 @@ Feature: Boards
     """
     And I save the response as "P"
 
-  Scenario: PUT Board
+  Scenario: PUT Board, edit name
     When I send a "PUT" request to "/boards/{P.id}" with json body
     """
     {
