@@ -2,13 +2,9 @@ package org.fundationjala.trello.runner;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
-
-import java.util.List;
 
 @CucumberOptions(
         glue = {"org.fundationjala.trello"},
