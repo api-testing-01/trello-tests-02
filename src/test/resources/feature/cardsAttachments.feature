@@ -27,7 +27,7 @@ Feature: CardsAttachments
     """
     And I save the response as "C"
 
-  @cleanData
+  @cleanData @WIP
   Scenario: POST Card Attachment
     When I send a "POST" request to "/cards/{C.id}/attachments" with json body
     """
@@ -46,7 +46,7 @@ Feature: CardsAttachments
     When I send a GET request to "/cards/{C.id}/attachments"
     Then I validate the response has status code 200
 
-  @CleanData
+  @CleanData @WIP
   Scenario: Delete Card Attachment
     When I send a "DELETE" request to "/cards/{C.id}/attachments/{A.idAttachment}"
     Then I validate the response has status code 200
