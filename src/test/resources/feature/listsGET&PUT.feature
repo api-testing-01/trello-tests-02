@@ -53,6 +53,32 @@ Feature: Lists GET and PUT
       | subscribed | false           | false         |
       | softLimit  | 100             | 100           |
       | idBoard    | "(B.id)"        | {B.id}        |
+  @cleanData
+  Scenario: GET list/{id}/board
+    Given I send a "PUT" request to "/boards/{B.id}" with json body
+    """
+    {
+    "name": "A new Project",
+    "desc":"This is the board for list"
+     }
+    """
+    And I validate the response has status code 200
+    And I save the response as "B"
+    When I send a "GET" request to "/lists/{L.id}/board"
+    Then I validate the response has status code 200
+    And I validate the response contains "name" equals "A new Project"
+    And I validate the response contains "desc" equals "This is the board for list"
+
+  @cleanData
+  Scenario Outline: GET list/{id} with wrong URL
+    When I send a "GET" request to "<endpoint>/<listId>"
+    And I save the response as "R"
+    Then I validate the response has status code <errorCode>
+    And I validate the response contains "<errorMessage>"
+    Examples:
+      | endpoint  | listId | errorCode | errorMessage           |
+      | /lists123 | {L.id} | 404       | Cannot GET /1/lists123 |
+      | /lists    | 123    | 400       | invalid id             |
 
   @cleanData
   Scenario: PUT list/{id}
