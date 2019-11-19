@@ -16,7 +16,7 @@ public class Runner extends AbstractTestNGCucumberTests {
     @BeforeTest
     public void beforeAllScenarios() {
 
-        System.setProperty("dataproviderthreadcount", "4");
+        System.setProperty("dataproviderthreadcount", "2");
 
         // clean data
 /*        RequestSpecification requestSpec = RequestSpecFactory.getRequestSpec("pivotal", "owner");
