@@ -39,10 +39,10 @@ Feature: Cards
     And I save the request endpoint for deleting
 
   Scenario: GET Card
-    When I send a GET request to "/cards/{C.id}"
+    When I send a "GET" request to "/cards/{C.id}"
     Then I validate the response has status code 200
     And I validate the response contains "name" equals "Api Testing Trello"
-    And I send a DELETE request to "/cards/{C.id}"
+    And I send a "DELETE" request to "/cards/{C.id}"
     And I validate the response has status code 200
 
   @cleanData
