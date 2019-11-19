@@ -29,13 +29,12 @@ Feature: Cards
       """
     And I validate the response has status code 200
     And I save the response as "C"
-    #And I save the request endpoint for deleting
 
   @cleanData
   Scenario: PUT Card
     When I send a "PUT" request to "/cards/{C.id}" with datatable
       | name   | Api Testing Trello [PUT]  |
-      | desc   | Changed from API [PUT]|
+      | desc   | Changed from API [PUT]    |
     Then I validate the response has status code 200
     And I validate the response contains "name" equals "Api Testing Trello [PUT]"
     And I validate the response contains "desc " equals "Changed from API [PUT]"
