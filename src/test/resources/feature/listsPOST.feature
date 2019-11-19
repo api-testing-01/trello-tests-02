@@ -1,4 +1,4 @@
-Feature: Lists
+Feature: Lists POST
   Background: Create a Board
     Given I use the "trello" service and the "owner" account
     And I send a "POST" request to "/boards" with json body

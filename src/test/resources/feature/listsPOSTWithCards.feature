@@ -1,4 +1,4 @@
-Feature: Lists
+Feature: Lists POST to process cards
   Background: Create a List with two cards
     Given I use the "trello" service and the "owner" account
     And I send a "POST" request to "/boards" with json body

@@ -1,4 +1,4 @@
-Feature: Lists
+Feature: Lists GET and PUT
   Background: Create a List
     Given I use the "trello" service and the "owner" account
     And I send a "POST" request to "/boards" with json body
