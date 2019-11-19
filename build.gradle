@@ -30,7 +30,7 @@ task runFeatures(type: Test) {
     useTestNG()
     options {
         jvmArgs = ['-Dcucumber.options= --glue org.fundationjala.trello ' +
-                           '--plugin pretty ']
+                           '--plugin pretty -t ~@WIP']
     }
     testLogging.showStandardStreams = true
     scanForTestClasses = false
