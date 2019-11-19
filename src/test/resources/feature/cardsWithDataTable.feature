@@ -18,19 +18,24 @@ Feature: Cards
     }
     """
     And I save the response as "L"
-    And I send a "POST" request to "/cards" with datatable
-      | name   | Api Testing Trello          |
-      | desc   | For testing                 |
-      | pos    | top                         |
-      | idList | (L.id)                      |
-    And I save the response as "P"
-    And I save the request endpoint for deleting
+    And I send a "POST" request to "/cards" with json body
+      """
+      {
+      "name": "Api Testing Trello ",
+      "desc": "For testing" ,
+      "pos" : "top" ,
+      "idList" : "(L.id)"
+      }
+      """
+    And I save the response as "200"
+    And I save the response as "C"
+    #And I save the request endpoint for deleting
 
   @cleanData
   Scenario: PUT Card
     When I send a "PUT" request to "/cards/{C.id}" with datatable
       | name   | Api Testing Trello [PUT]  |
-      | pos    | bottom                    |
+      | desc   | Changed from API [PUT]|
     Then I validate the response has status code 200
     And I validate the response contains "name" equals "Api Testing Trello [PUT]"
-    And I validate the response contains "pos" equals "bottom"
+    And I validate the response contains "desc " equals "Changed from API [PUT]"
