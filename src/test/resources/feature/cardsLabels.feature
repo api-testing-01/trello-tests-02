@@ -41,7 +41,7 @@ Feature: CardsLabels
     And I validate the response has status code 200
     And I validate the response contains "name" equals "In progress"
 
-  @CleanData
+  @CleanData @WIP
   Scenario: Delete Card Label
     When I send a "DELETE" request to "/cards/{C.id}/idLabels/{Lbl.idLabel}"
     Then I validate the response has status code 200

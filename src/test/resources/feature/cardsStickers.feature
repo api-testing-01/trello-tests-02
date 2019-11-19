@@ -27,7 +27,7 @@ Feature: CardsStickers
     """
     And I save the response as "C"
 
-  @cleanData
+  @cleanData @WIP
   Scenario: POST Card Sticker
     When I send a "POST" request to "/cards/{C.id}/stickers" with json body
     """
