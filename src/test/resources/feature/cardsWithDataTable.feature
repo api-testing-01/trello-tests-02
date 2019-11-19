@@ -27,7 +27,7 @@ Feature: Cards
       "idList" : "(L.id)"
       }
       """
-    And I save the response as "200"
+    And I validate the response has status code 200
     And I save the response as "C"
     #And I save the request endpoint for deleting
 
