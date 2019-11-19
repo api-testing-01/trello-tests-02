@@ -43,4 +43,18 @@ public final class DynamicIdHelper {
         return result.toString().replaceAll("[\\(\\)]", "");
     }
 
+    public static String replaceIdsCurlyFormat(final ScenarioContext context, final String body) {
+        if (!body.contains("{")) {
+            return body;
+        }
+        StringBuffer result = new StringBuffer();
+        Pattern pattern = Pattern.compile("(?<=\\{)(.*?)(?=\\})");
+        Matcher matcher = pattern.matcher(body);
+        while (matcher.find()) {
+            matcher.appendReplacement(result, getElementResponse(context, matcher.group()));
+        }
+        matcher.appendTail(result);
+        return result.toString().replaceAll("[\\{\\}]", "");
+    }
+
 }

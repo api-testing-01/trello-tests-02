@@ -24,7 +24,7 @@ Feature: Lists
     """
     Then I validate the response has status code 200
     And I validate the response contains "name" equals "List created by POST cucumber"
-    #And I validate the response contains "idBoard" equals "{B.id}"
+    And I validate the response contains "idBoard" equals "{B.id}"
     And I validate the response contains "pos" equals "10.5"
     And I validate the response contains "closed" equals "false"
 
@@ -48,7 +48,7 @@ Feature: Lists
      }
     """
     And I validate the response contains "name" equals "List Edited by PUT cucumber"
-    #And I validate the response contains "idBoard" equals "{B.id}"
+    And I validate the response contains "idBoard" equals "{B.id}"
     And I validate the response contains "pos" equals "10.5"
     And I validate the response contains "closed" equals "true"
 
@@ -99,7 +99,7 @@ Feature: Lists
     When I send a "GET" request to "/lists/{L.id}"
     Then I validate the response has status code 200
     And I validate the response contains "name" equals "List created by POST cucumber"
-    #And I validate the response contains "idBoard" equals "{B.id}"
+    And I validate the response contains "idBoard" equals "{B.id}"
     And I validate the response contains "pos" equals "10.5"
     And I validate the response contains "closed" equals "false"
 
@@ -132,5 +132,6 @@ Feature: Lists
       | name   | "Edited by PUT"  | Edited by PUT   |
       | pos   | 0.25  | 0.25   |
       | subscribed   | true  | true   |
+      | subscribed   | false  | false   |
       | softLimit   | 100  | 100   |
-#      | idBoard   | "newId"  | "newId"   |
+      | idBoard   | "(B.id)"  | {B.id}   |
