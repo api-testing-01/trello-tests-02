@@ -12,7 +12,7 @@ Feature: Members
        }
       """
     And I save the response as "O"
-    And I send a "PUT" request to "/organizations{O.id}/members" with json body
+    And I send a "PUT" request to "/organizations/{O.id}/members" with json body
     """
     {
     "id": "(O.id)",
