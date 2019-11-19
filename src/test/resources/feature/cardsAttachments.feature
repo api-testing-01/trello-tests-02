@@ -43,7 +43,7 @@ Feature: CardsAttachments
 
   @cleanData
   Scenario: GET Card Attachment
-    When I send a GET request to "/cards/{C.id}/attachments"
+    When I send a "GET" request to "/cards/{C.id}/attachments"
     Then I validate the response has status code 200
 
   @CleanData @WIP

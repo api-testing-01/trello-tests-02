@@ -18,7 +18,7 @@ Feature: Cards
     }
     """
     And I save the response as "L"
-    And I send a "POST" request to "/cards" with with datatable
+    And I send a "POST" request to "/cards" with datatable
       | name   | Api Testing Trello          |
       | desc   | For testing                 |
       | pos    | top                         |
@@ -27,7 +27,7 @@ Feature: Cards
     And I save the request endpoint for deleting
 
   @cleanData
-  Scenario Outline: PUT Card
+  Scenario: PUT Card
     When I send a "PUT" request to "/cards/{C.id}" with datatable
       | name   | Api Testing Trello [PUT]  |
       | pos    | bottom                    |
