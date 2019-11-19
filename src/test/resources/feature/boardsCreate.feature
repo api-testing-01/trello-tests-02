@@ -28,4 +28,4 @@ Feature: Board create feature
     And I save the response as "P"
     Then I send a "GET" request to "/boards/{P.id}"
     And I validate the response contains "prefs.permissionLevel" equals "public"
-    And I validate the response contains "name" equals "BoardCreate001 created by cucumber"
+    And I validate the response contains "name" equals "BoardCreate002 created by cucumber"
