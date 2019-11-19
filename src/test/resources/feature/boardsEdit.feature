@@ -35,3 +35,13 @@ Feature: Boards
     And I validate the response contains "prefs.permissionLevel" equals "private"
     And I send a "DELETE" request to "/boards/{P.id}"
     And I validate the response has status code 200
+
+  @cleanData
+  Scenario: try edit a board no exist
+    When I send a "PUT" request to "/boards/1326546987" with json body
+    """
+    {
+    "name": "Board0001 updated by cucumber"
+    }
+    """
+    Then I validate the response has status code 400
