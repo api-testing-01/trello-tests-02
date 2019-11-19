@@ -72,3 +72,5 @@ Feature: Cards
   Scenario: DELETE Card
     When I send a "DELETE" request to "/cards/{C.id}"
     Then I validate the response has status code 200
+    And I send a "GET" request to "/cards/{C.id}"
+    And I validate the response has status code 404
