@@ -10,6 +10,7 @@ Feature: Boards
     """
     And I save the response as "P"
 
+  @cleanData
   Scenario: PUT Board, edit name
     When I send a "PUT" request to "/boards/{P.id}" with json body
     """
@@ -19,5 +20,18 @@ Feature: Boards
     """
     Then I validate the response has status code 200
     And I validate the response contains "name" equals "Board0001 updated by cucumber"
+    And I send a "DELETE" request to "/boards/{P.id}"
+    And I validate the response has status code 200
+
+  @cleanData
+  Scenario: PUT Board, edit permission level
+    When I send a "PUT" request to "/boards/{P.id}" with json body
+    """
+    {
+    "prefs_permissionLevel": "private"
+    }
+    """
+    Then I validate the response has status code 200
+    And I validate the response contains "prefs.permissionLevel" equals "private"
     And I send a "DELETE" request to "/boards/{P.id}"
     And I validate the response has status code 200
