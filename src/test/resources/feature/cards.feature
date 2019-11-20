@@ -70,12 +70,8 @@ Feature: Cards
 
   @cleanData
   Scenario Outline: PUT cards/{id}/field
-    When I send a "PUT" request to "/cards/{C.id}/<field>" with json body
-    """
-    {
-    "value": <value>
-    }
-    """
+    When I send a "PUT" request to "/cards/{C.id}/<field>" with datatable
+      | value   | <value>  |
     Then I validate the response has status code 200
     And I send a "GET" request to "/cards/{C.id}/<field>"
     And I validate the response has status code 200
