@@ -69,6 +69,26 @@ Feature: Cards
     And I validate the response contains "name" equals "Api Testing Trello [PUT]"
 
   @cleanData
+  Scenario Outline: PUT cards/{id}/field
+    When I send a "PUT" request to "/cards/{C.id}/<field>" with json body
+    """
+    {
+    "value": <value>
+    }
+    """
+    Then I validate the response has status code 200
+    And I send a "GET" request to "/cards/{C.id}/<field>"
+    And I validate the response has status code 200
+    And I validate the response contains "_value" equals "<result>"
+    Examples:
+      | field         | value         | result        |
+      | board         | true          | true          |
+      | attachments   | "cover"       | "false"       |
+      | members       | false         | true          |
+      | membersVoted  | false         | true          |
+      | board_fields  | "closed"      | "pinned"      |
+
+  @cleanData
   Scenario: DELETE Card
     When I send a "DELETE" request to "/cards/{C.id}"
     Then I validate the response has status code 200
