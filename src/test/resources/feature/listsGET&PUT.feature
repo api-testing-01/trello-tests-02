@@ -151,3 +151,20 @@ Feature: Lists GET and PUT
     When I send a "GET" request to "/lists/{L.id}/idBoard"
     Then I validate the response has status code 200
     And I validate the response contains "_value" equals "{B2.id}"
+
+  @cleanData
+  Scenario Outline: PUT list/{id} with wrong URL
+    When I send a "PUT" request to "<endpoint>/<listId><field>" with json body
+    """
+    {
+    "name": "new name"
+     }
+    """
+    And I save the response as "R"
+    Then I validate the response has status code <errorCode>
+    And I validate the response contains "<errorMessage>"
+    Examples:
+      | endpoint  | listId  | errorCode | errorMessage                                | field            |
+      | /lists123 | {L.id}/ | 404       | Cannot PUT /1/lists123/{L.id}               |                  |
+      | /lists    | 123/    | 400       | invalid id                                  |                  |
+      | /lists    | {L.id}/ | 404       | Cannot PUT /1/lists/{L.id}/nonExistentField | nonExistentField |
