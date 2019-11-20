@@ -26,7 +26,7 @@ public final class DynamicIdHelper {
     private static String getElementResponse(final ScenarioContext context, final String element) {
         String[] elementSplit = element.split("\\.");
         Response response = (Response) context.get(elementSplit[0]);
-        return response.jsonPath().getString(elementSplit[1]);
+        return response.jsonPath().getString(element.substring(element.indexOf(".")));
     }
 
     public static String replaceIds(final ScenarioContext context, final String body) {

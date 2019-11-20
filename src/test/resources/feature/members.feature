@@ -35,12 +35,12 @@ Feature: Members
 
    @cleanData
    Scenario: PUT /members/{id}
-    When I send a "PUT" request to "/members/{M.id}" with json body
+    When I send a "PUT" request to "/members/{M.members[0].id}" with json body
     """
     {
-    "fullName":"Lizzy Amabel Mendivil Bejarano"
-    "initials": "LAMB"
-    "username": "li"
+    "fullName":"Lizzy Amabel Mendivil Bejarano",
+    "initials": "LAMB",
+    "username": "lizz",
     "bio": "This is a bio"
     }
     """
