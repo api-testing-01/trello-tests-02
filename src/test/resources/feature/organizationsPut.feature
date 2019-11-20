@@ -49,7 +49,7 @@ Feature: Organizations PUT request
        }
       """
       Then I validate the response has status code 200
-      And I validate the response contains "members.fullName[1]" equals "brayan.tester2017"
+      And I validate the response contains "members.fullName[-1]" equals "brayan.tester2017"
       When I send a "PUT" request to "/organizations/{O.id}/members/brayantester20171" with json body
       """
       {
@@ -57,10 +57,7 @@ Feature: Organizations PUT request
        }
       """
       Then I validate the response has status code 200
-      And I validate the response contains "memberships.memberType[1]" equals "admin"
-
-
-
+      And I validate the response contains "memberships.memberType[-1]" equals "admin"
 
 
 
