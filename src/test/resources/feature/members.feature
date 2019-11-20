@@ -46,3 +46,25 @@ Feature: Members
     """
     Then I validate the response has status code 200
     And I validate the response contains "initials" equals "LAMB"
+
+   @cleanData
+   Scenario: GET /members/{id}/boards
+    When I send a "POST" request to "/boards" with json body
+    """
+    {
+    "name": "My Board" ,
+    "idOrganization": "(O.id)"
+    }
+    """
+    And I validate the response has status code 200
+    And I save the response as "B"
+    And I send a "PUT" request to "/boards/{B.id}/members/{M.id}" with json body
+    """
+    {
+    "type": "normal" ,
+    "allowBillableGuest": "true"
+    }
+    """
+    And I send a "GET" request to "/members/{M.id}/boards"
+    Then I validate the response has status code 200
+    And I validate the response contains "name" equals "My Board"
