@@ -32,3 +32,17 @@ Feature: Members
     }
     """
     Then I validate the response has status code 200
+
+   @cleanData
+   Scenario: PUT /members/{id}
+    When I send a "PUT" request to "/members/{M.id}" with json body
+    """
+    {
+    "fullName":"Lizzy Amabel Mendivil Bejarano"
+    "initials": "LAMB"
+    "username": "li"
+    "bio": "This is a bio"
+    }
+    """
+    Then I validate the response has status code 200
+    And I validate the response contains "initials" equals "LAMB"
