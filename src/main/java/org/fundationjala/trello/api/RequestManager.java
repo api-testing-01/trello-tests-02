@@ -5,6 +5,7 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public final class RequestManager {
@@ -14,33 +15,33 @@ public final class RequestManager {
 
     public static Response doRequest(final String httpMethod, final RequestSpecification requestSpecification,
                                      final String endpoint, final String jsonBody) {
-        if ("POST".equalsIgnoreCase(httpMethod)) {
-            return RequestManager.post(requestSpecification, endpoint, jsonBody);
-        } else if ("PUT".equalsIgnoreCase(httpMethod)) {
-            return RequestManager.put(requestSpecification, endpoint, jsonBody);
-        } else {
-            return RequestManager.patch(requestSpecification, endpoint, jsonBody);
-        }
+        Map<String, IRequest> requestMap = new HashMap<>();
+        requestMap.put("POST", () -> RequestManager.post(requestSpecification, endpoint, jsonBody));
+        requestMap.put("PUT", () -> RequestManager.put(requestSpecification, endpoint, jsonBody));
+        requestMap.put("PATCH", () -> RequestManager.patch(requestSpecification, endpoint, jsonBody));
+
+        return requestMap.get(httpMethod).executeRequest();
     }
 
     public static Response doRequest(final String httpMethod, final RequestSpecification requestSpecification,
                                      final String endpoint, final Map<String, String> body) {
-        if ("POST".equalsIgnoreCase(httpMethod)) {
-            return RequestManager.post(requestSpecification, endpoint, body);
-        } else if ("PUT".equalsIgnoreCase(httpMethod)) {
-            return RequestManager.put(requestSpecification, endpoint, body);
-        } else {
-            return RequestManager.patch(requestSpecification, endpoint, body);
-        }
+
+        Map<String, IRequest> requestMap = new HashMap<>();
+        requestMap.put("POST", () -> RequestManager.post(requestSpecification, endpoint, body));
+        requestMap.put("PUT", () -> RequestManager.put(requestSpecification, endpoint, body));
+        requestMap.put("PATCH", () -> RequestManager.patch(requestSpecification, endpoint, body));
+
+        return requestMap.get(httpMethod).executeRequest();
     }
 
     public static Response doRequest(final String httpMethod, final RequestSpecification requestSpecification,
                                      final String endpoint) {
-        if ("GET".equalsIgnoreCase(httpMethod)) {
-            return RequestManager.get(requestSpecification, endpoint);
-        } else {
-            return RequestManager.delete(requestSpecification, endpoint);
-        }
+
+        Map<String, IRequest> requestMap = new HashMap<>();
+        requestMap.put("GET", () -> RequestManager.get(requestSpecification, endpoint));
+        requestMap.put("DELETE", () -> RequestManager.delete(requestSpecification, endpoint));
+
+        return requestMap.get(httpMethod).executeRequest();
     }
 
     public static Response post(final RequestSpecification requestSpec, final String endpoint,

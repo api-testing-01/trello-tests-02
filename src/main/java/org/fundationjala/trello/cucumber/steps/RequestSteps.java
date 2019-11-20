@@ -100,4 +100,11 @@ public class RequestSteps {
             }
         }
     }
+
+    @And("I validate the response contains {string}")
+    public void iValidateTheResponseContains(final String expectedValue) {
+        String actual = response.getBody().asString();
+        String expected = DynamicIdHelper.replaceIdsCurlyFormat(context, expectedValue);
+        Assert.assertTrue(actual.contains(expected));
+    }
 }
