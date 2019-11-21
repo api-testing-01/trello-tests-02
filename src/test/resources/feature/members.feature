@@ -57,7 +57,7 @@ Feature: Members
     """
     And I validate the response has status code 200
     And I save the response as "B"
-    And I send a "PUT" request to "/boards/{B.id}/members/{M.id}" with json body
+    And I send a "PUT" request to "/boards/{B.id}/members/{M.members[0].id}" with json body
     """
     {
     "type": "normal" ,
