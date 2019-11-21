@@ -23,24 +23,14 @@ Feature: Members
     """
     And I save the response as "M"
 
-  #@cleanData
-  #Scenario: POST Member Avatar
-    #When I send a "POST" request to "/members/{M.id}/avatar" with json body
-    #"""
-    #{
-    #"file": "./avatars/lmendivil.jpg"
-    #}
-    #"""
-    #Then I validate the response has status code 200
-
    @cleanData
    Scenario: PUT /members/{id}
     When I send a "PUT" request to "/members/{M.id}" with json body
     """
     {
-    "fullName":"Lizzy Amabel Mendivil Bejarano"
-    "initials": "LAMB"
-    "username": "li"
+    "fullName":"Lizzy Amabel Mendivil Bejarano" ,
+    "initials": "LAMB",
+    "username": "lizzy",
     "bio": "This is a bio"
     }
     """
