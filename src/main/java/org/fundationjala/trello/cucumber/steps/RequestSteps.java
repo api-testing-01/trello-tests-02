@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.fundationjala.trello.Environment;
 import org.fundationjala.trello.JsonHelper;
 import org.fundationjala.trello.ScenarioContext;
 import org.fundationjala.trello.api.DynamicIdHelper;
@@ -13,12 +14,14 @@ import org.fundationjala.trello.api.RequestManager;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 
+import java.util.List;
 import java.util.Map;
 
 public class RequestSteps {
 
     private Response response;
     private ScenarioContext context;
+    private final Environment ENV = Environment.getInstance();
 
     public RequestSteps(final ScenarioContext context) {
         this.context = context;
@@ -106,5 +109,19 @@ public class RequestSteps {
         String actual = response.getBody().asString();
         String expected = DynamicIdHelper.replaceIdsCurlyFormat(context, expectedValue);
         Assert.assertTrue(actual.contains(expected));
+    }
+
+    @Given("I get the {string} from current member")
+    public void iGetTheFromCurrentMember(final String field) {
+        final String formedEndpoint = "/members/"+ ENV.getValue("trello.credentials.owner.username")+"/"+field;
+        final String httpMethod = "GET";
+        iSendARequestTo(httpMethod,formedEndpoint);
+    }
+
+    @And("I delete all result in {string}")
+    public void iDeleteAllResultFromMember(final String endPoint) {
+        List<String> ids = response.jsonPath().getList("");
+        for (String a : ids)
+            iSendARequestTo("DELETE",endPoint+"/"+a);
     }
 }
